@@ -1,0 +1,19 @@
+{
+  "name": "barnes_house/ao-c_2024",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Zac Barnes",
+      "email": "zbarnes757@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "phpstan/phpstan": "^2.0",
+    "friendsofphp/php-cs-fixer": "^3.65"
+  }
+}
