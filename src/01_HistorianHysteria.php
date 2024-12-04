@@ -16,10 +16,8 @@ function processLine(string $line): array
 
 // Read file inputs
 $file_path = __DIR__ . '/../inputs/01_input.txt';
-$file = fopen($file_path, 'r');
-$contents = fread($file, filesize($file_path));
+$contents = file_get_contents($file_path);
 $contents = trim($contents);
-fclose($file);
 $lines = explode("\n", $contents);
 
 // PART 1

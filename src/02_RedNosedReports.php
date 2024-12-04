@@ -2,15 +2,16 @@
 
 // Read input file
 $file_path = __DIR__ . '/../inputs/02_input.txt';
-$file = fopen($file_path, 'r');
-$contents = fread($file, filesize($file_path));
+$contents = file_get_contents($file_path);
 $contents = trim($contents);
-fclose($file);
 $lines = explode("\n", $contents);
 
 // PART 1
 $count = 0;
 
+/**
+ * @param array<int> $numbers
+ */
 function isSafe(array $numbers): bool
 {
     $increasing = true;
@@ -51,6 +52,9 @@ foreach ($lines as $line) {
 echo "PART 1: " . $count . PHP_EOL;
 
 // PART 2
+/**
+ * @param array<int> $numbers
+ */
 function isSafeWithDampener(array $numbers): bool
 {
     if (isSafe($numbers)) {

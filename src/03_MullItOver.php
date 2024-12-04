@@ -6,13 +6,11 @@ final class MullItOver
     private string $contents;
     public function __construct(string $filePath)
     {
-        $file = fopen($filePath, 'r');
-        $contents = fread($file, filesize($filePath));
+        $contents = file_get_contents($filePath);
         $this->contents = trim($contents);
-        fclose($file);
     }
 
-    public function evaluateCorruptedData(?string $contents = null)
+    public function evaluateCorruptedData(?string $contents = null): int
     {
         $contents = $contents ?? $this->contents;
         $regex = '/mul\((\d+,\d+)\)/';
@@ -24,10 +22,11 @@ final class MullItOver
         }, 0);
     }
 
-    public function evaluateCorruptedDataWithConditions()
+    public function evaluateCorruptedDataWithConditions(): int
     {
         $matches = [];
-        preg_match_all("/(?:don't\(\)|do\(\)|mul\(\d{1,3},\s*\d{1,3}\))/", $this->contents, $matches);
+        $regex = '/(?:don\'t\(\)|do\(\)|mul\(\d{1,3},\s*\d{1,3}\))/';
+        preg_match_all($regex, $this->contents, $matches);
         [$_, $sum] = array_reduce($matches[0], function ($carry, $item) {
             [$include, $amount] = $carry;
             if ($item == "don't()") {
